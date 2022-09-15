@@ -6,14 +6,17 @@ const cors = require("cors");
 
 //*require files
 const connect = require("./DB/connect");
+const categoryRoute = require("./router/category");
 
-//*useing cors
+//* app useing
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cors());
+
 app.use(cors());
 
 //*test route
-app.get("/api/v1/test", (req, res) => {
-  res.send("heloo world");
-});
+app.use("/api/v1/test", categoryRoute);
 
 //*starting the server
 const start = async () => {
