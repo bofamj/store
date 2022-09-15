@@ -8,7 +8,7 @@ const cors = require("cors");
 app.use(cors());
 
 //*test route
-app.git("/api/v1/test", (req, res) => {
+app.get("/api/v1/test", (req, res) => {
   res.send("heloo world");
 });
 
