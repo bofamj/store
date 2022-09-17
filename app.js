@@ -8,6 +8,7 @@ const cors = require("cors");
 const connect = require("./DB/connect");
 const categoryRoute = require("./router/category");
 const subCategoryRoute = require("./router/subCategory");
+const prand = require("./router/brand");
 
 //* app useing
 app.use(express.json());
@@ -19,6 +20,7 @@ app.use(cors());
 //*test route
 app.use("/api/v1/test", categoryRoute);
 app.use("/api/v1", subCategoryRoute);
+app.use("/api/v1", prand);
 
 //*starting the server
 const start = async () => {

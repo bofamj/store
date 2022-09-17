@@ -6,7 +6,7 @@ const createSubCategory = async (req, res) => {
     const subCategory = await SubCategory.create(req.body);
     res.status(200).json(subCategory);
   } catch (error) {
-    console.log(error.message);
+    res.status(500).json({ message: error.message });
   }
 };
 //* get all new SubCategory
@@ -15,7 +15,7 @@ const getSubCategory = async (req, res) => {
     const subCategory = await SubCategory.find();
     res.status(200).json(subCategory);
   } catch (error) {
-    console.log(error.message);
+    res.status(500).json({ message: error.message });
   }
 };
 //* get Specific SubCategory
@@ -24,7 +24,7 @@ const getSpecificSubCategory = async (req, res) => {
     const subCategory = await SubCategory.findOne({ _id: req.params.id });
     res.status(200).json(subCategory);
   } catch (error) {
-    console.log(error.message);
+    res.status(500).json({ message: error.message });
   }
 };
 //* update SubCategory
@@ -37,7 +37,7 @@ const updateSubCategory = async (req, res) => {
     );
     res.status(200).json(subCategory);
   } catch (error) {
-    console.log(error.message);
+    res.status(500).json({ message: error.message });
   }
 };
 //* delete SubCategory
@@ -48,7 +48,7 @@ const deleteSubCategory = async (req, res) => {
     });
     res.status(200).send("delete subCategory success");
   } catch (error) {
-    console.log(error.message);
+    res.status(500).json({ message: error.message });
   }
 };
 
