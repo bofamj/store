@@ -42,7 +42,7 @@ const updateCategory = async (req, res) => {
     const category = await Caegory.findOneAndUpdate(
       { _id: categoryId },
       req.body,
-      { new: true }
+      { new: true, runValidators: true }
     );
     res.status(200).json(category);
   } catch (error) {

@@ -14,6 +14,7 @@ const categorySchema = new Schema(
     },
     img: "string",
   },
+
   { timestamps: true }
 );
 
