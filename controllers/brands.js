@@ -1,7 +1,8 @@
 const Brand = require("../models/brand");
-
+const slugify = require("slugify");
 //* crate brand
 const createBrand = async (req, res) => {
+  req.body.slug = slugify(req.body.name);
   try {
     const brand = await Brand.create(req.body);
     res.status(200).json(brand);

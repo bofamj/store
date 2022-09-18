@@ -1,5 +1,5 @@
 const Caegory = require("../models/category");
-
+const slugify = require("slugify");
 //* git all category
 const getAllCategory = async (req, res) => {
   const allCategory = await Caegory.find();
@@ -9,7 +9,7 @@ const getAllCategory = async (req, res) => {
 
 //*add category to DB
 const addCategory = async (req, res) => {
-  const { name, slug, img } = req.body;
+  req.body.slug = slugify(req.body.name);
   try {
     const category = await Caegory.create(req.body);
     res.status(200).json(category);
