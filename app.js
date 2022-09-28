@@ -1,9 +1,9 @@
 require("dotenv").config();
-const mongoose = require("mongoose");
 const express = require("express");
 const app = express();
 const cors = require("cors");
-
+/* const session = require("express-session");
+const passport = require("passport"); */
 //*require files
 const connect = require("./DB/connect");
 const categoryRoute = require("./router/category");
@@ -17,7 +17,16 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
-app.use(cors());
+//*use session
+/* app.use(
+  session({
+    secret: "keyboard cat",
+    resave: false,
+    saveUninitialized: false,
+  })
+);
+app.use(passport.initialize());
+app.use(passport.session()); */
 
 //* routes
 app.use("/api/v1/test", categoryRoute);

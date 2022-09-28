@@ -1,8 +1,9 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 const Schema = mongoose.Schema;
-const passportLocalMongoose = require("passport-local-mongoose");
+/* const passportLocalMongoose = require("passport-local-mongoose"); */
 
 const UserSchema = new Schema(
   {
@@ -45,6 +46,17 @@ UserSchema.pre("save", async function (next) {
   this.password = await bcrypt.hash(this.password, salt);
   next();
 });
+
+//*create jwt token
+UserSchema.methods.createJWT = function () {
+  return jwt.sign(
+    { userId: this._id, name: this.name },
+    process.env.JWT_SECRET,
+    {
+      expiresIn: process.env.JWT_LIFETIME,
+    }
+  );
+};
 
 //* compare password
 UserSchema.methods.comparePassword = async function (aditanyPassword) {
