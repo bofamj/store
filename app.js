@@ -11,6 +11,7 @@ const subCategoryRoute = require("./router/subCategory");
 const brandRoute = require("./router/brand");
 const productsRoute = require("./router/product");
 const regesterRoute = require("./router/user");
+const cartRoute = require("./router/cart");
 
 //* app useing
 app.use(express.json());
@@ -34,6 +35,7 @@ app.use("/api/v1", subCategoryRoute);
 app.use("/api/v1", brandRoute);
 app.use("/api/v1", productsRoute);
 app.use("/api/v1", regesterRoute);
+app.use("/api/v1", cartRoute);
 
 //*starting the server
 const start = async () => {
