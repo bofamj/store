@@ -20,6 +20,9 @@ const createUser = async (req, res) => {
 const logInUser = async (req, res) => {
   const { password, email } = req.body;
 
+  if (email === "" || password === "") {
+    res.ststus(400).json({ error: "Invalid email or password" });
+  }
   try {
     //*find the user in the DB
     const user = await User.findOne({ email });
@@ -29,12 +32,12 @@ const logInUser = async (req, res) => {
 
     //*the password is wrong throw an error
     if (!isPassowrd) {
-      res.status(400).json({ message: "Password is incorrect" });
+      return res.status(400).json({ message: "Password is incorrect" });
     }
     const token = user.createJWT();
     res.status(200).json({ email: user.email, token: token });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    return res.status(500).json({ message: error.message });
   }
 };
 

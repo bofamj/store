@@ -16,7 +16,7 @@ const CartSchema = new Schema(
         price: Number,
       },
     ],
-    user: { type: mongoose.Schema.ObjectId, ref: "User", required: true },
+    user: { type: mongoose.Schema.ObjectId, ref: "User" },
     totalPrice: Number,
   },
   { timestamps: true }

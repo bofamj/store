@@ -35,6 +35,7 @@ const UserSchema = new Schema(
       required: [true, "you must procvide a passwrd"],
       minLength: [6, "too short passwrd"],
     },
+    isAdmin: Boolean,
   },
   { timestamps: true }
 );
@@ -50,7 +51,7 @@ UserSchema.pre("save", async function (next) {
 //*create jwt token
 UserSchema.methods.createJWT = function () {
   return jwt.sign(
-    { userId: this._id, name: this.name },
+    { userId: this._id, name: this.firstName, isAdmin: this.isAdmin },
     process.env.JWT_SECRET,
     {
       expiresIn: process.env.JWT_LIFETIME,

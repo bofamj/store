@@ -12,6 +12,8 @@ const brandRoute = require("./router/brand");
 const productsRoute = require("./router/product");
 const regesterRoute = require("./router/user");
 const cartRoute = require("./router/cart");
+const auth = require("./middleware/auth");
+const adminAuth = require("./middleware/admin");
 
 //* app useing
 app.use(express.json());
@@ -30,12 +32,12 @@ app.use(passport.initialize());
 app.use(passport.session()); */
 
 //* routes
-app.use("/api/v1/test", categoryRoute);
+app.use("/api/v1/test", [auth, adminAuth], categoryRoute);
 app.use("/api/v1", subCategoryRoute);
 app.use("/api/v1", brandRoute);
 app.use("/api/v1", productsRoute);
 app.use("/api/v1", regesterRoute);
-app.use("/api/v1", cartRoute);
+app.use("/api/v1", auth, cartRoute);
 
 //*starting the server
 const start = async () => {
