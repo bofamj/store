@@ -29,6 +29,9 @@ const getAllProducts = async (req, res) => {
         select: "name",
       },
     ]);
+    if (!products) {
+      return res.status(404).send({ message: "there is now products " });
+    }
 
     res.status(200).json(products);
   } catch (error) {
@@ -40,6 +43,11 @@ const getAllProducts = async (req, res) => {
 const getSpecificProduct = async (req, res) => {
   try {
     const product = await Product.findOne({ _id: req.params.id });
+    if (!product) {
+      return res
+        .status(404)
+        .send({ message: "there is now product with this id!! " });
+    }
     res.status(200).json(product);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -54,6 +62,11 @@ const updateProduct = async (req, res) => {
       req.body,
       { new: true, runValidators: true }
     );
+    if (!product) {
+      return res
+        .status(404)
+        .send({ message: "there is now product with this id!! " });
+    }
     res.status(200).json(product);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -64,6 +77,11 @@ const updateProduct = async (req, res) => {
 const deleteProduct = async (req, res) => {
   try {
     const product = await Product.findOneAndDelete({ _id: req.params.id });
+    if (!product) {
+      return res
+        .status(404)
+        .send({ message: "there is now product with this id!! " });
+    }
     res.status(200).send("you successfully deleted a product");
   } catch (error) {
     res.status(500).json({ message: error.message });
