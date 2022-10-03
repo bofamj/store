@@ -27,6 +27,9 @@ const findSpecificCtegory = async (req, res) => {
 
   try {
     const category = await Caegory.findOne({ _id: categoryId });
+    if (!category) {
+      return res.status(404).send({ message: "there is now categorys " });
+    }
     res.status(200).json(category);
   } catch (error) {
     console.log(error);
@@ -44,6 +47,11 @@ const updateCategory = async (req, res) => {
       req.body,
       { new: true, runValidators: true }
     );
+    if (!category) {
+      return res
+        .status(404)
+        .send({ message: "there is now category whith this id " });
+    }
     res.status(200).json(category);
   } catch (error) {
     console.log(error);
@@ -58,6 +66,11 @@ const deleteCategory = async (req, res) => {
 
   try {
     const category = await Caegory.findOneAndDelete({ _id: categoryId });
+    if (!category) {
+      return res
+        .status(404)
+        .send({ message: "there is now category whith this id " });
+    }
     res.status(200).send("delete category success");
   } catch (error) {
     console.log(error);

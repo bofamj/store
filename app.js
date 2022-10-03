@@ -32,7 +32,7 @@ app.use(passport.initialize());
 app.use(passport.session()); */
 
 //* routes
-app.use("/api/v1/test", [auth, adminAuth], categoryRoute);
+app.use("/api/v1/test", categoryRoute);
 app.use("/api/v1", subCategoryRoute);
 app.use("/api/v1", brandRoute);
 app.use("/api/v1", productsRoute);
