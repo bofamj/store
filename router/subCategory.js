@@ -8,13 +8,18 @@ const {
   updateSubCategory,
   deleteSubCategory,
 } = require("../controllers/subCategory");
+const auth = require("../middleware/auth");
+const admin = require("../middleware/admin");
 
-router.route("/subCategory").get(getSubCategory).post(createSubCategory);
+router
+  .route("/subCategory")
+  .get(auth, getSubCategory)
+  .post([auth, admin], createSubCategory);
 
 router
   .route("/subCategory/:id")
-  .get(getSpecificSubCategory)
-  .patch(updateSubCategory)
-  .delete(deleteSubCategory);
+  .get(auth, getSpecificSubCategory)
+  .patch([auth, admin], updateSubCategory)
+  .delete([auth, admin], deleteSubCategory);
 
 module.exports = router;

@@ -15,6 +15,9 @@ const createSubCategory = async (req, res) => {
 const getSubCategory = async (req, res) => {
   try {
     const subCategory = await SubCategory.find();
+    if (!subCategory) {
+      return res.status(404).send({ message: "there is now subCategorys !! " });
+    }
     res.status(200).json(subCategory);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -24,6 +27,11 @@ const getSubCategory = async (req, res) => {
 const getSpecificSubCategory = async (req, res) => {
   try {
     const subCategory = await SubCategory.findOne({ _id: req.params.id });
+    if (!subCategory) {
+      return res
+        .status(404)
+        .send({ message: "there is now subCategorys with this id!! " });
+    }
 
     res.status(200).json(subCategory);
   } catch (error) {
@@ -38,6 +46,11 @@ const updateSubCategory = async (req, res) => {
       req.body,
       { new: true, runValidators: true }
     );
+    if (!subCategory) {
+      return res
+        .status(404)
+        .send({ message: "there is now subCategorys with this id!! " });
+    }
     res.status(200).json(subCategory);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -49,6 +62,11 @@ const deleteSubCategory = async (req, res) => {
     const subCategory = await SubCategory.findOneAndDelete({
       _id: req.params.id,
     });
+    if (!subCategory) {
+      return res
+        .status(404)
+        .send({ message: "there is now subCategorys with this id!! " });
+    }
     res.status(200).send("delete subCategory success");
   } catch (error) {
     res.status(500).json({ message: error.message });
